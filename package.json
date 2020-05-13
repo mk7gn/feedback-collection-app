@@ -1,36 +1,19 @@
 {
-  "name": "feedback-collection-app",
+  "name": "server",
   "version": "1.0.0",
-  "description": "Feedback collection application, FE + BE.   Language: JavaScript.   Tech Stack: NodeJS, React, Redux, Express, MongoDB",
+  "description": "",
+  "main": "index.js",
   "engines": {
     "node": "10.15.1",
     "npm": "6.4.1"
   },
   "scripts": {
-    "start": "node server",
-    "test": "cd client && npm run test && cd ../server && npm run test"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "cacheDirectories": [
-    "node_modules",
-    "react-ui/node_modules"
-  ],
-  "dependencies": {
-    "express": "~4.17.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mk7gn/feedback-collection-app.git"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "create-react-app",
-    "react"
-  ],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mk7gn/feedback-collection-app/issues"
-  },
-  "homepage": "https://github.com/mk7gn/feedback-collection-app#readme"
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
