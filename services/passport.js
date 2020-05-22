@@ -26,11 +26,11 @@ passport.use(new GoogleStrategy(
     const user = await findUserByGoogleId(profile.id);
 
     if (user) {
-      done(null, user)
-    } else {
-      const newUser = await saveUser(profile)
-      done(null, newUser);
+      return done(null, user)
     }
+
+    const newUser = await saveUser(profile)
+    done(null, newUser);
   }
 ));
 
