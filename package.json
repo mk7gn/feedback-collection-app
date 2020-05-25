@@ -8,6 +8,7 @@
     "npm": "6.4.1"
   },
   "scripts": {
+    "build": "npm run build --prefix client",
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
