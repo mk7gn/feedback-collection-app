@@ -1,6 +1,7 @@
 
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const keys = require('../config/keys');
 const mongoose = require('mongoose');
 
@@ -15,15 +16,31 @@ passport.deserializeUser(async (id, done) => {
   done(null, user);
 });
 
-passport.use(new GoogleStrategy(
-  {
+passport.use(new GoogleStrategy({
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
     callbackURL: '/auth/google/callback',
     proxy: true
   },
   async (accessToken, refreshToken, profile, done) => {
-    const user = await findUserByGoogleId(profile.id);
+    const user = await findUserByOauthId(profile.id);
+
+    if (user) {
+      return done(null, user)
+    }
+
+    const newUser = await saveUser(profile)
+    done(null, newUser);
+  }
+));
+
+passport.use(new FacebookStrategy({
+    clientID: keys.facebookClientID,
+    clientSecret: keys.facebookClientSecret,
+    callbackURL: "/auth/facebook/callback"
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    const user = await findUserByOauthId(profile.id);
 
     if (user) {
       return done(null, user)
@@ -43,9 +60,9 @@ async function findUserById(id) {
   }
 }
 
-async function findUserByGoogleId(userId) {
+async function findUserByOauthId(userId) {
   try {
-    let user = await User.findOne({googleId: userId});
+    let user = await User.findOne({oauthId: userId});
     return user;
   } catch(err) {
     return err;
@@ -55,7 +72,7 @@ async function findUserByGoogleId(userId) {
 async function saveUser(data) {
   try {
     let newUser = await new User({
-      googleId: data.id,
+      oauthId: data.id,
       firstName: data.name.givenName,
       lastName: data.name.familyName
     }).save();

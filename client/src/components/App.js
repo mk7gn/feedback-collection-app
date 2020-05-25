@@ -16,13 +16,15 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <BrowserRouter>
           <div>
             <Header />
-            <Route path="/" component={Landing} exact />
-            <Route path="/surveys" component={Dashboard} exact />
-            <Route path="/surveys/new" component={SurveyNew} exact />
+            <div className="container">
+              <Route path="/" component={Landing} exact />
+              <Route path="/surveys" component={Dashboard} exact />
+              <Route path="/surveys/new" component={SurveyNew} exact />
+            </div>
           </div>
         </BrowserRouter>
       </div>

@@ -11,7 +11,9 @@ class Header extends Component {
     if (auth === false) {
       return (
         <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <li><a href="">Login</a></li>
           <li><a href="/auth/google">Login with Google</a></li>
+          <li><a href="/auth/facebook">Login with Facebook</a></li>
         </ul>
       );
     }
@@ -24,15 +26,16 @@ class Header extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
-      <nav>
-        <div className="nav-wrapper">
+      <nav className="teal lighten-2">
+        <div className="nav-wrapper row">
           <Link to={this.props.auth ? '/surveys' : '/'}
-                className="brand-logo">
-                Emaily
+                className="brand-logo col m6">
+            <i className="material-icons">email</i>Emaily
           </Link>
-          { this.renderContent() }
+          <div className="col m6 right">
+            { this.renderContent() }
+          </div>
         </div>
       </nav>
     );
