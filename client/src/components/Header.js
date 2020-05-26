@@ -29,10 +29,12 @@ class Header extends Component {
     return (
       <nav className="teal lighten-2">
         <div className="nav-wrapper row">
-          <Link to={this.props.auth ? '/surveys' : '/'}
-                className="brand-logo col m6">
-            <i className="material-icons">email</i>Emaily
-          </Link>
+          <div className="col m6">
+            <Link to={this.props.auth ? '/surveys' : '/'}
+                  className="brand-logo">
+              <i className="material-icons">email</i>Emaily
+            </Link>
+          </div>
           <div className="col m6 right">
             { this.renderContent() }
           </div>
