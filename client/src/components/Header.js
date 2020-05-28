@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import Payments from './Payments';
+
 class Header extends Component {
   renderContent() {
     const {auth} = this.props;
@@ -9,20 +11,17 @@ class Header extends Component {
       return;
     }
     if (auth === false) {
-      return (
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
-          <li><a href="/">Login</a></li>
-          <li><a href="/auth/google">Login with Google</a></li>
-          <li><a href="/auth/facebook">Login with Facebook</a></li>
-        </ul>
-      );
+      return [
+          <li key="1"><a href="/">Login</a></li>,
+          <li key="2"><a href="/auth/google">Login with Google</a></li>,
+          <li key="3"><a href="/auth/facebook">Login with Facebook</a></li>
+      ];
     }
-    return (
-      <ul id="nav-mobile" className="right hide-on-med-and-down">
-        <li>{auth.firstName} {auth.lastName}</li>
-        <li><a href="/auth/logout">Logout</a></li>
-      </ul>
-    );
+    return [
+        <li key="1"><Payments /></li>,
+        <li key="2">{auth.firstName} {auth.lastName}</li>,
+        <li key="3"><a href="/auth/logout">Logout</a></li>
+    ];
   }
 
   render() {
@@ -36,7 +35,9 @@ class Header extends Component {
             </Link>
           </div>
           <div className="col m6 right">
-            { this.renderContent() }
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
+              { this.renderContent() }
+            </ul>
           </div>
         </div>
       </nav>
