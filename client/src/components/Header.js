@@ -18,8 +18,8 @@ class Header extends Component {
       ];
     }
     return [
-        <li key="1"><Payments /></li>,
-        <li key="2">{auth.firstName} {auth.lastName}</li>,
+        <li style={{marginRight:'10px'}} key="1"><Payments /></li>,
+        <li style={{marginRight:'10px'}} key="2">{auth.firstName} {auth.lastName} ({auth.credits}$)</li>,
         <li key="3"><a href="/auth/logout">Logout</a></li>
     ];
   }
